@@ -1,44 +1,50 @@
+package com.Revature.models;
 
-import jakarta.persistence.*
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.persistence.*;
+import lombok.Data;
 
+import java.util.Date;
+
+@Data
 @Entity
-@Table(name = "users")
+@Table(name = "account")
 public class User{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int userId;
+    @Column(name = "user_id")
+    private long userId;
 
-    @Column(name = "full_name")
+    @Column(name = "full_name", nullable = false)
     private String fullName;
 
-    @Column(name = "email")
+    @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(name = "phone_number")
-    private int phoneNumber;
+    @Column(name = "phone", nullable = false)
+    private String phoneNumber;
 
-    @Column(name = "password")
+    @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "role")
-    private String role;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "user_role", nullable = false)
+    private UserRole role;
 
-    @Column(name = "created_on")
-    private date createdOn;
+    @Column(name = "created_on", nullable = false)
+    private Date createdOn;
 
-    @Column(name = "updated_on")
-    private date updatedOn;
+    @Column(name = "updated_on", nullable = false)
+    private Date updatedOn;
 
 
 
     public User() {
-        super();
     }
 
-    public User(int userId, String fullName, String email, int phoneNumber, String password, String role, date createdOn, date updatedOn) {
-        super();
-        this.userId = userId;
+    public User(String fullName, String email, String phoneNumber, String password, UserRole role, Date createdOn, Date updatedOn) {
+//        super();
         this.fullName = fullName;
         this.email = email;
         this.phoneNumber = phoneNumber;
@@ -48,7 +54,7 @@ public class User{
         this.updatedOn = updatedOn;
     }
 
-    public int getUserId() {
+    public long getUserId() {
         return userId;
     }
 
@@ -72,11 +78,11 @@ public class User{
         this.email = email;
     }
 
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
@@ -88,27 +94,27 @@ public class User{
         this.password = password;
     }
 
-    public String getRole() {
+    public UserRole getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(UserRole role) {
         this.role = role;
     }
 
-    public date getCreatedOn() {
+    public Date getCreatedOn() {
         return createdOn;
     }
 
-    public void setCreatedOn(date createdOn) {
+    public void setCreatedOn(Date createdOn) {
         this.createdOn = createdOn;
     }
 
-    public date getUpdatedOn() {
+    public Date getUpdatedOn() {
         return updatedOn;
     }
 
-    public void setUpdatedOn(date updatedOn) {
+    public void setUpdatedOn(Date updatedOn) {
         this.updatedOn = updatedOn;
     }
 
@@ -116,4 +122,5 @@ public class User{
     public String toString() {
         return "User [userId=" + userId + ", fullName=" + fullName + ", email=" + email + ", phoneNumber=" + phoneNumber + ", password=" + password + ", role=" + role + ", createdOn=" + createdOn + ", updatedOn=" + updatedOn + "]";
     }
+
 }
