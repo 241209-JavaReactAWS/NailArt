@@ -55,11 +55,12 @@ public class UserMessagesService {
     }
 
     //delete message by id
-    public void deleteMessageById(long messageId){
+    public boolean deleteMessageById(long messageId){
         if (messageId <= 0){
-            return;
+            return false;
         }
         userMessagesRepo.deleteById(messageId);
+        return true;
     }
 
     //delete message by user id
